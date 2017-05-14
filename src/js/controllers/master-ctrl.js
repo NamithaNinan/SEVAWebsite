@@ -28,6 +28,7 @@ function MasterCtrl($scope, $cookieStore) {
 
     });
 
+    
     $scope.toggleSidebar = function() {
         $scope.toggle = !$scope.toggle;
         $cookieStore.put('toggle', $scope.toggle);

@@ -1,131 +1,165 @@
-<div class="row alerts-container" data-ng-controller="AlertsCtrl" data-ng-show="alerts.length">
-  <div class="col-xs-12">
-    <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-  </div>
-</div>
+<div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
 
-<div class="row">
-	<div class="col-lg-3 col-md-6 col-xs-12">
+    <!-- Sidebar -->
+
+    <div id="sidebar-wrapper">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a ng-click="toggleSidebar()">
+            SEVA
+            <span class="menu-icon glyphicon glyphicon-transfer"></span>
+          </a>
+        </li>
+        <li class="sidebar-title"><span>NAVIGATION</span></li>
+        <li class="sidebar-list">
+          <a href="#!/home">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+        </li>
+        
+      </ul>
+      <div class="sidebar-footer">
+        <div class="col-xs-6">
+          <a href="https://github.com/pavanchokshi/SEVA" target="_blank">
+            Github
+          </a>
+        </div>
+          
+<!--
+        <div class="col-xs-6">
+          <a href="https://github.com/rdash/rdash-angular/blob/master/README.md" target="_blank">
+            About
+          </a>
+        </div>
+        
+-->
+      </div>
+    </div>
+
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+        <div class="row header">
+          <div class="col-xs-12">
+            <div class="user pull-right">
+              <div class="item dropdown" uib-dropdown ng-controller="userctrl">
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                  <img src="img/avatar.jpg">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Admin
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a href="#" ng-click="logout()">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+<!--
+              <div class="item dropdown" uib-dropdown>
+               <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                  <i class="fa fa-bell-o"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Notifications
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="#">Server Down!</a>
+                  </li>
+                </ul>
+              </div>
+-->
+            </div>
+            <div class="meta">
+              <div class="page">
+                Admin Dashboard
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <!-- End Header Bar -->
+
+        <!-- Main Content -->
+        <div class="row" ng-controller="userctrl">
+	<div class="col-lg-6 col-md-6 col-xs-12">
 		<rd-widget>
 			<rd-widget-body>
 				<div class="widget-icon green pull-left">
 					<i class="fa fa-users"></i>
 				</div>
-				<div class="title">80</div>
+				<div ng-repeat="user in greeting | filter: {'isVolunteer': false} as result"></div><div class="title">{{result.length}}</div>
 				<div class="comment">Users</div>
 			</rd-widget-body>
 		</rd-widget>
 	</div>
-	<div class="col-lg-3 col-md-6 col-xs-12">
+	<div class="col-lg-6 col-md-6 col-xs-12">
 		<rd-widget>
 			<rd-widget-body>
 				<div class="widget-icon red pull-left">
-					<i class="fa fa-tasks"></i>
+					<i class="fa fa-users"></i>
 				</div>
-				<div class="title">16</div>
-				<div class="comment">Servers</div>
+				<div ng-repeat="user in greeting | filter: {'isVolunteer': true} as result"></div><div class="title">{{result.length}}</div>
+				<div class="comment">Volunteers</div>
 			</rd-widget-body>
 		</rd-widget>
 	</div>
-	<div class="col-lg-3 col-md-6 col-xs-12">
-		<rd-widget>
-			<rd-widget-body>
-				<div class="widget-icon orange pull-left">
-					<i class="fa fa-sitemap"></i>
-				</div>
-				<div class="title">225</div>
-				<div class="comment">Documents</div>
-			</rd-widget-body>
-		</rd-widget>
-	</div>
-	<div class="col-lg-3 col-md-6 col-xs-12">
-		<rd-widget>
-			<rd-widget-body>
-				<div class="widget-icon blue pull-left">
-					<i class="fa fa-support"></i>
-				</div>
-				<div class="title">62</div>
-				<div class="comment">Tickets</div>
-			</rd-widget-body>
-		</rd-widget>
-	</div>
+	
 </div>
 
 <div class="row">
-	<div class="col-lg-6">
+	<div class="col-lg-6" ng-controller="userctrl">
 		<rd-widget>
-      		<rd-widget-header icon="fa-tasks" title="Servers">
-				<a href="#">Manage</a>
+      		<rd-widget-header icon="fa-tasks" title="Users">
+				
       		</rd-widget-header>
       		<rd-widget-body classes="medium no-padding">
-				<div class="table-responsive">
+				<div class="table-responsive"  >
+                    <input type="text" style="left-padding:10px" class="form-control input-sm" placeholder="Search" ng-model="searchname" />   
 					<table class="table">
-						<tbody>
-							<tr><td>RDVMPC001</td><td>238.103.133.37</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
-							<tr><td>RDVMPC002</td><td>68.66.63.170</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
-							<tr><td>RDVMPC003</td><td>76.117.212.33</td><td><span tooltip="Server Down!" class="text-danger"><i class="fa fa-warning"></i></span></td></tr>
-							<tr><td>RDPHPC001</td><td>91.88.224.5</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
-							<tr><td>RDESX001</td><td>197.188.15.93</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
-							<tr><td>RDESX002</td><td>168.85.154.251</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
-							<tr><td>RDESX003</td><td>209.25.191.61</td><td><span tooltip="Server Down!" class="text-danger"><i class="fa fa-warning"></i></span></td></tr>
-							<tr><td>RDESX004</td><td>252.37.192.235</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
-							<tr><td>RDTerminal01</td><td>139.71.18.207</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
-							<tr><td>RDTerminal02</td><td>136.80.122.212</td><td><span tooltip="Could not connect!" class="text-warning"><i class="fa fa-flash"></i></span></td></tr>
-							<tr><td>RDDomainCont01</td><td>196.80.245.33</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+                        <thead>
+							<tr><th class="text-left">Name</th><th>Device</th><th>Activity</th></tr>
+						</thead>
+						<tbody ng-repeat="user in greeting | filter: {'firstName': searchname} | filter: {'isVolunteer': false}  " >
+                            <tr><td><a ng-href="#!/users?username={{user.userName}}" ng-model="user.userName">{{user.firstName}} {{user.lastName}}</a></td><td>Android wear</td><td><a class="btn pull-left" ng-class="{true: 'btn-primary', false: 'btn-danger'}[!patient.activate]" ng-click="patient.activate = !patient.activate">{{!patient.activate && 'Activate' || 'Disable'}} User</a></td></tr>
+<!--                            <span ng-model="class1" class={{class1}}><i ng-model="class2" class={{class2}}></i></span>-->
 						</tbody>
+                        
 					</table>
-				</div>
+                </div>
+				<!--</div>-->
 			</rd-widget-body>
 		</rd-widget>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-6" ng-controller="userctrl2">
 		<rd-widget>
-			<rd-widget-header icon="fa-users" title="Users">
-				<input type="text" placeholder="Search" class="form-control input-sm" />
+			<rd-widget-header icon="fa-users" title="Volunteers">
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">
-				<div class="table-responsive">
+				<div class="table-responsive"  ng-controller="userctrl2">
+                    <input type="text" class="form-control input-sm" placeholder="Search" ng-model="searchvol" /> 
 					<table class="table">
-						<thead>
-							<tr><th class="text-center">ID</th><th>Username</th><th>Role</th><th>Account</th></tr>
+                        
+                        <thead>
+							<tr><th class="text-left">Name</th><th>Activity</th></tr>
 						</thead>
-						<tbody>
-							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td><td>AZ23045</td></tr>
-							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td><td>AU24783</td></tr>
-							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td><td>AM23781</td></tr>
+						<tbody ng-repeat="volunteer in greeting | filter: {'firstName': searchvol} | filter: {'isVolunteer': true}">
+                            <tr><td><a ng-href="#!/volunteers?volname={{volunteer.userName}}" ng-model="volunteer.userName">{{volunteer.firstName}} {{volunteer.lastName}}</a></td><td><a class="btn pull-left" ng-class="{true: 'btn-primary', false: 'btn-danger'}[!volunteer.activate]" ng-click="volunteer.activate = !volunteer.activate">{{!volunteer.activate && 'Activate' || 'Disable'}} Volunteer</a></td></tr>
 						</tbody>
+                        
 					</table>
-        		</div>
+				</div>
 			</rd-widget-body>
-		<rd-widget>
+        </rd-widget>
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-lg-6">
-   		<rd-widget>
-   			<rd-widget-header icon="fa-plus" title="Extras">
-   				<button class="btn btn-sm btn-info">Button</button>
-   			</rd-widget-header>
-   			<rd-widget-body>
-				<div class="message">
-					This is a standard message which will also work the ".no-padding" class, I can also <span class="error">be an error message!</span>
-				</div>
-				<hr />
-				<div class="message">
-					<a href="http://angular-ui.github.io/bootstrap/" target="_blank">UI Bootstrap</a> is included, so you can use <a href="#" tooltip="I'm a tooltip!">tooltips</a> and all of the other native Bootstrap JS components!
-				</div>
-   			</rd-widget-body>
-   		</rd-widget>
-	</div>
-	<div class="col-lg-6">
-		<rd-widget>
-			<rd-widget-header icon="fa-cog fa-spin" title="Loading Directive">
-				<a href="http://tobiasahlin.com/spinkit/" target="_blank">SpinKit</a>
-			</rd-widget-header>
-			<rd-widget-body>
-				<rd-loading></rd-loading>
-			</rd-widget-body>
-		</rd-widget>
-	</div>
-</div>
+      </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+  </div>

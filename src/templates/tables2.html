@@ -55,8 +55,8 @@
                   <li class="dropdown-header">
                     Admin
                   </li>
-<!--
                   <li class="divider"></li>
+<!--
                   <li class="link">
                     <a href="#">
                       Profile
@@ -72,8 +72,8 @@
                       Menu Item
                     </a>
                   </li>
--->
                   <li class="divider"></li>
+-->
                   <li class="link">
                     <a href="#">
                       Logout
@@ -109,8 +109,8 @@
         <!-- End Header Bar -->
 
         <!-- Main Content -->
-        <div class="row" ng-controller="eachuserctrl">
-    <div class="table-responsive"  ng-controller="eachuserctrl">
+        <div class="row" ng-controller="eachvolctrl">
+    <div class="table-responsive"  ng-controller="eachvolctrl">
                     
         <p></p><br>
         
@@ -125,34 +125,34 @@
                             <tr><td><b>Address: </b></td><td>{{answer.address1}}<br>{{answer.address2}}<br>{{answer.city}} , {{answer.state}} {{answer.zip}}</td></tr>
                             
                              <tr><td><b>Phone Number: </b></td><td>{{answer.phone}}</td></tr>
-                                <tr><td><b>Emergency Details</b></td></tr>
-                             <tr ng-repeat="contact in answer.emergencyContactDetails"><td><b>Contact</b></td><td><b>Name:</b> {{contact.firstName}} {{contact.lastName}} <br><b>Relationship:</b> {{contact.relationship}} <br><b>Phone Number: </b>{{contact.phone}}<br><b>Address:</b>{{answer.address1}}<br>{{answer.address2}}<br>{{answer.city}} , {{answer.state}} {{answer.zip}}</td></tr>
-                            <tr ng-repeat="a in req"><td>{{req.acceptedBy}}</td></tr>
+                             
 						</tbody>
 					</table>
                
 				</div>
            
           </div>
-           <div class="row" ng-controller="rqstctrl">
-    <div class="table-responsive"  ng-controller="rqstctrl">
+
+           <div class="row" ng-controller="rqstctrl2">
+    <div class="table-responsive"  ng-controller="rqstctrl2">
                     
         <p></p><br>
         
 					<table class="table">
                         <thead>
-							<tr><th class="text-left" style="font-size:34px">Request Details</th></tr>
+							<tr><th class="text-left" style="font-size:34px">Response Details</th></tr>
 						</thead>
 						<tbody style="border:0px">
-                            <th class="text-left">Accepted By</th><th>Raised At</th>
-                            <tr ng-repeat="contact in req | filter: {'raisedBy': name}"><td>{{contact.acceptedBy}}</td><td>{{contact.raisedOn}}</td></tr>
+                            <th class="text-left">Request Sent By</th><th>Responded At</th>
+                            <tr ng-repeat="contact in req | filter: {'acceptedBy': name}"><td>{{contact.raisedBy}}</td><td>{{contact.raisedOn}}</td></tr>
                         </tbody>
 					</table>
                
 				</div>
-           
+           </div>
                             
 
-      </div><!-- End Page Content -->
+<!--       End Page Content -->
+
     </div><!-- End Content Wrapper -->
   </div>
